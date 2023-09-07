@@ -1,0 +1,9 @@
+flask
+flask-sslify
+langchain
+openai
+google-search-results
+wikipedia
+faiss-cpu
+sentence_transformers
+tiktoken
