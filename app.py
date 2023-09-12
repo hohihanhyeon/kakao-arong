@@ -1,3 +1,4 @@
+from arong import chat
 import sys
 import json
 from flask import Flask, request, send_file, jsonify
@@ -26,13 +27,13 @@ def setup_ssl():
 def configs():
     pass
 
-@app.route('/chat', methods=['POST'])
-def arong():
+@app.route('/test', methods=['POST'])
+def test():
     """
     카카오톡 봇에서 보내는 스킬api로 요청이 오면 "안녕"을 보냅니다.
     """
     data = request.get_json()
-    d(data)
+    d(f"/test: {data}")
 
     response = {
         "version": "2.0",
@@ -41,6 +42,34 @@ def arong():
                 {
                     "simpleText": {
                         "text": "안녕"
+                    }
+                }
+            ]
+        }
+    }
+    return jsonify(response), 200
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    """
+    카카오톡 봇에서 보내는 스킬api로 요청이 언어모델이 적절한 답변을 보냅니다.
+    """
+    data = request.get_json()
+    d(f"/chat: {data}")
+
+    # 사용자의 메세지 추출하기
+    user_msg = data['userRequest']['utterance']
+    d(f"user_msg: {user_msg}")
+
+    ai_msg = chat.chat(user_msg)
+
+    response = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText": {
+                        "text": ai_msg
                     }
                 }
             ]
