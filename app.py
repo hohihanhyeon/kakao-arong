@@ -96,6 +96,6 @@ if __name__ == '__main__':
         setup_ssl()
         app_kargs['ssl_context'] = (ssl_fullchain, ssl_privkey)
     
-    port = 5000
+    port = 11418
     app.run(debug=True, host='0.0.0.0', port=port, **app_kargs)
     i(f"서버가 {port}포트에서 시작되었습니다")
