@@ -28,7 +28,7 @@ def configs():
     pass
 
 @app.route('/test', methods=['POST'])
-def test():
+def test_response():
     """
     카카오톡 봇에서 보내는 스킬api로 요청이 오면 "안녕"을 보냅니다.
     """
@@ -50,7 +50,7 @@ def test():
     return jsonify(response), 200
 
 @app.route('/chat', methods=['POST'])
-def chat():
+def chat_response():
     """
     카카오톡 봇에서 보내는 스킬api로 요청이 언어모델이 적절한 답변을 보냅니다.
     """
@@ -61,7 +61,7 @@ def chat():
     user_msg = data['userRequest']['utterance']
     d(f"user_msg: {user_msg}")
 
-    ai_msg = chat.chat(user_msg)
+    ai_msg = chat(user_msg)
 
     response = {
         "version": "2.0",
