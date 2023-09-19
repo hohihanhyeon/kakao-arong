@@ -2,6 +2,7 @@ import logging
 # import util
 import arong.util as util
 
+
 def get(name, file="./log.log"):
     """
     이름이 name인 로거를 가져온다.
@@ -18,20 +19,17 @@ def get(name, file="./log.log"):
 
     if not logger.hasHandlers():
         logger.setLevel(logging.INFO)
+        format = "[%(asctime)s] [%(name)s/%(levelname)s] %(message)s"
+        formatter = logging.Formatter(fmt=format, datefmt="%H:%M:%S")
 
-        stream_formatter = logging.Formatter(
-            "[%(asctime)s] [%(levelname)s] %(message)s"
-        )
         stream_handler = logging.StreamHandler()
-        stream_handler.setFormatter(stream_formatter)
+        stream_handler.setFormatter(formatter)
         stream_handler.setLevel(logging.INFO)
         logger.addHandler(stream_handler)
 
         file_handler = logging.FileHandler(file, mode="w", encoding="utf-8")
-        file_formatter = logging.Formatter(
-            "[%(asctime)s] %(levelname)s(%(name)s) %(message)s"
-        )
-        file_handler.setFormatter(file_formatter)
+
+        file_handler.setFormatter(formatter)
         file_handler.setLevel(logging.INFO)
         logger.addHandler(file_handler)
 
@@ -46,6 +44,7 @@ levels = {
     "c": logging.CRITICAL,
 }
 
+
 def set_level(name, level):
     """
     로그 레벨을 설정
@@ -57,6 +56,5 @@ def set_level(name, level):
     level = levels[level]
     logger = logging.getLogger(name)
     logger.setLevel(level)
-    for hander in logger.handlers:
-        hander.setLevel(level)
-        
+    for handler in logger.handlers:
+        handler.setLevel(level)

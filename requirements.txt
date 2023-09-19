@@ -7,3 +7,4 @@ wikipedia
 faiss-cpu
 sentence_transformers
 tiktoken
+requests
