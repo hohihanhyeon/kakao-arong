@@ -129,6 +129,7 @@ def setup():
 
 
 if __name__ == '__main__':
+    setup()
     # app configs 설정
     configs()
     pool = LLMPool()

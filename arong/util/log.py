@@ -12,7 +12,7 @@ def get(name, file="./log.log"):
     """
 
     # file의 부모디렉토리 생성
-    util.mkdirs(file)
+    util.create_file(file)
 
     # 로거 생성
     logger = logging.getLogger(name)

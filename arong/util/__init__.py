@@ -5,9 +5,13 @@ import json
 import os
 
 
-def mkdirs(file):
-    parent_dir = os.path.dirname(file)
-    os.makedirs(parent_dir, exist_ok=True)
+def mkdirs(directory):
+    os.makedirs(directory, exist_ok=True)
+
+
+def create_file(file):
+    mkdirs(os.path.dirname(file))
+    open(file, 'w').close()
 
 
 def pprint(d):
